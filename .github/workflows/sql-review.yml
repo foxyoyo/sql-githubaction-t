@@ -27,8 +27,6 @@ jobs:
           database-type: POSTGRES # "<The database type>"
           file-pattern:  ^db/dev/.*\.sql$  # "<The file pattern for your SQL files>"
 
-
-jobs:
   sql-review-prod:
     runs-on: ubuntu-latest
     name: SQL Review
