@@ -1,4 +1,7 @@
-on: [pull_request]
+name: fox-sql-review-test
+# on: [pull_request]
+on: [push]
+
 
 jobs:
   sql-review:
