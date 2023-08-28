@@ -1,6 +1,11 @@
 name: fox-sql-review-test
 # on: [pull_request]
-on: [push]
+# on: [push]
+
+on:
+  push:
+    branches:
+      - 'master'
 
 
 jobs:
