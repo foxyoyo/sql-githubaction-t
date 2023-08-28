@@ -23,3 +23,4 @@ jobs:
           template-id: bb.sql-review.dev # "<SQL review rule template id> , should be one of bb.sql-review.prod or bb.sql-review.dev" 
           database-type: POSTGRES # "<The database type>"
           file-pattern:  ^db/dev/.*\.sql$  # "<The file pattern for your SQL files>"
+
