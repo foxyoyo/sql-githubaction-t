@@ -1,2 +1,2 @@
-DELETE FROM book;
 DELETE FROM book WHERE OWNER_NAME like "%fox";
+DELETE FROM book;
