@@ -3,10 +3,6 @@ name: fox-sql-review-test
 # on: [push]
 
 on:
-  push:
-    branches:
-      - master
-      - develop
   pull_request:
     # Sequence of patterns matched against refs/heads
     branches:    
