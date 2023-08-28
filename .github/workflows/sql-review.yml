@@ -14,7 +14,7 @@ jobs:
   sql-review-dev:
     runs-on: ubuntu-latest
     name: SQL Review
-    if: github.ref == 'refs/heads/develop'
+    if: github.ref_name == 'develop'
     steps:
       - uses: actions/checkout@v3
       - name: Check DEV SQL
