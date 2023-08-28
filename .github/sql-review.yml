@@ -7,7 +7,6 @@ on:
     branches:
       - 'master'
 
-
 jobs:
   sql-review:
     runs-on: ubuntu-latest
