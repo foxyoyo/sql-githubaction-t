@@ -6,17 +6,18 @@ on:
   pull_request:
     # Sequence of patterns matched against refs/heads
     branches:    
-      - main
+      - master
       - 'develop'
       - 'releases/**'
 
 jobs:
-  sql-review:
+  sql-review-dev:
     runs-on: ubuntu-latest
     name: SQL Review
+    if: github.ref == 'refs/heads/develop'
     steps:
       - uses: actions/checkout@v3
-      - name: Check SQL
+      - name: Check DEV SQL
         # You can change it to a specific version like bytebase/sql-review-action@0.0.4
         # We suggest using the latest version through the tag. Check it at https://github.com/Bytebase/sql-review-action/tags
         uses: bytebase/sql-review-action@main
@@ -24,4 +25,22 @@ jobs:
           # override-file-path: "<Your SQL review rules configuration file path>, ie: ./sql-review-override.yml "
           template-id: bb.sql-review.dev # "<SQL review rule template id> , should be one of bb.sql-review.prod or bb.sql-review.dev" 
           database-type: POSTGRES # "<The database type>"
-          file-pattern:  ^db/.*\.sql$  # "<The file pattern for your SQL files>"
+          file-pattern:  ^db/dev/.*\.sql$  # "<The file pattern for your SQL files>"
+
+
+jobs:
+  sql-review-prod:
+    runs-on: ubuntu-latest
+    name: SQL Review
+    if: github.ref == 'refs/heads/master'
+    steps:
+      - uses: actions/checkout@v3
+      - name: Check DEV SQL
+        # You can change it to a specific version like bytebase/sql-review-action@0.0.4
+        # We suggest using the latest version through the tag. Check it at https://github.com/Bytebase/sql-review-action/tags
+        uses: bytebase/sql-review-action@main
+        with:
+          # override-file-path: "<Your SQL review rules configuration file path>, ie: ./sql-review-override.yml "
+          template-id: bb.sql-review.dev # "<SQL review rule template id> , should be one of bb.sql-review.prod or bb.sql-review.dev" 
+          database-type: POSTGRES # "<The database type>"
+          file-pattern:  ^db/prod/.*\.sql$  # "<The file pattern for your SQL files>"
