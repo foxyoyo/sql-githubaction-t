@@ -1,5 +1,3 @@
-# sql-githubaction-t
-
 
 # sql-review.yaml sample
 - ref : https://github.com/marketplace/actions/sql-review
