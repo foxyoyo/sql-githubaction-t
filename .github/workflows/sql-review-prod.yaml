@@ -11,10 +11,9 @@ jobs:
   sql-review-prod:
     runs-on: ubuntu-latest
     name: SQL Review
-    if: github.ref == 'refs/heads/master'
     steps:
       - uses: actions/checkout@v3
-      - name: Check DEV SQL
+      - name: Check PROD SQL SCRIPT
         # You can change it to a specific version like bytebase/sql-review-action@0.0.4
         # We suggest using the latest version through the tag. Check it at https://github.com/Bytebase/sql-review-action/tags
         uses: bytebase/sql-review-action@main
