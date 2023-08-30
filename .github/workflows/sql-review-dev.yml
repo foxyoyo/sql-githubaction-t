@@ -22,7 +22,7 @@ jobs:
           # override-file-path: "<Your SQL review rules configuration file path>, ie: ./sql-review-override.yml "
           template-id: bb.sql-review.dev # "<SQL review rule template id> , should be one of bb.sql-review.prod or bb.sql-review.dev" 
           database-type: POSTGRES # "<The database type>"
-          file-pattern:  ^db/dev/.*\.sql$  # "<The file pattern for your SQL files>"
+          file-pattern:  ^db/dev/.*/.*\.sql$  # "<The file pattern for your SQL files>"
       - name: Notify SQL Review result
         # if: failure()
         if: always()
