@@ -7,7 +7,7 @@
 - Detail : ./override/sql-review-default.yaml
 ![Model](https://github.com/foxyoyo/sql-githubaction-t/blob/master/temp/chk_on_pr.png)
 ![Model](https://github.com/foxyoyo/sql-githubaction-t/blob/master/temp/error_happened.png)
-
+![Model](https://github.com/foxyoyo/sql-githubaction-t/blob/master/temp/all_pass.png)
 
 
 # About parameters in sql-review.yaml
