@@ -1,13 +1,23 @@
 
-# sql-review.yaml sample
+# sql-review action ref: 
 - ref : https://github.com/marketplace/actions/sql-review
 
-About parameters
-database-type: Required. The database type, should be one of MYSQL, POSTGRES or TIDB.
-override-file-path: Optional. Your SQL review rules configuration file path. You can configure and generate this file in Bytebase SQL Review Guide page. You can ignore this parameter and only provide the template-id if you don't want to customize rules.
-template-id: Optional. The SQL Review rule template id, should be one of bb.sql-review.prod or bb.sql-review.dev. You can ignore this parameter if you provide the override-file-path parameter.
-file-pattern: Optional. The file path regex pattern for your SQL files. Defaults ^.*\.sql$. For example, if you only want to subscribe to the SQL file changes in the db folder, you can set this parameter to ^db/.*\.sql$.
 
+# Checking SQL syntax on action "Pull request"
+- Detail : ./override/sql-review-default.yaml
+![Model](https://github.com/foxyoyo/sql-githubaction-t/blob/master/temp/chk_on_pr.png)
+![Model](https://github.com/foxyoyo/sql-githubaction-t/blob/master/temp/error_happened.png)
+![Model](https://github.com/foxyoyo/sql-githubaction-t/blob/master/temp/all_pass.png)
+
+
+# About parameters in sql-review.yaml
+- database-type: Required. The database type, should be one of MYSQL, POSTGRES or TIDB.
+- override-file-path: Optional. Your SQL review rules configuration file path. You can configure and generate this file in Bytebase SQL Review Guide page. You can ignore this parameter and only -    provide the template-id if you don't want to customize rules.
+- template-id: Optional. The SQL Review rule template id, should be one of bb.sql-review.prod or bb.sql-review.dev. You can ignore this parameter if you provide the override-file-path parameter.
+- file-pattern: Optional. The file path regex pattern for your SQL files. Defaults ^.*\.sql$. For example, if you only want to subscribe to the SQL file changes in the db folder, you can set this parameter to ^db/.*\.sql$.
+
+
+# github action workflow intergated sql-advisor sample 
 ```yaml
 on: [pull_request]
 
@@ -28,3 +38,6 @@ jobs:
           file-pattern: "<The file pattern for your SQL files>"
 
 ```
+# sql review define and override 
+- define : detail please see "./override/sql-review-default.yaml"
+- override: sample please see "./override/sql-review-override.yaml"

@@ -53,7 +53,7 @@ jobs:
       - uses: actions/checkout@v3
       - name: You can run SQL CD job here
         run: |
-          curl -vvv https://www.health2sync.com
+          echo "Run CD pipeline here "
 
       - name: Notify SQL CD pipeline result
         if: always()
