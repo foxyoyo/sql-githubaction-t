@@ -23,4 +23,51 @@ jobs:
           template-id: bb.sql-review.dev # "<SQL review rule template id> , should be one of bb.sql-review.prod or bb.sql-review.dev" 
           database-type: POSTGRES # "<The database type>"
           file-pattern:  ^db/dev/.*\.sql$  # "<The file pattern for your SQL files>"
-
+      - name: Notify SQL Review failure
+        # if: failure()
+        if: always()
+        id: slack
+        uses: slackapi/slack-github-action@v1.24.0
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        with:
+          channel-id: ${{ secrets.SLACK_WEBHOOK_CHANNEL }}
+          payload: |
+            {
+              "text": "GitHub Action build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}",
+              "blocks": [
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "GitHub Action build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}"
+                  }
+                }
+              ]
+            }
+  sql-deploy-to-dev:
+    needs: sql-review-dev
+    runs-on: ubuntu-latest
+    name: Run SQL CD Here
+    steps:
+      - uses: actions/checkout@v3
+      - name: You can run SQL CD job here
+        id: slack
+        uses: slackapi/slack-github-action@v1.24.0
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        with:
+          channel-id: ${{ secrets.SLACK_WEBHOOK_CHANNEL }}
+          payload: |
+            {
+              "text": "GitHub Action build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}",
+              "blocks": [
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "GitHub Action build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}"
+                  }
+                }
+              ]
+            }
