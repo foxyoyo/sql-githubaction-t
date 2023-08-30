@@ -10,10 +10,10 @@ on:
 jobs:
   sql-review-prod:
     runs-on: ubuntu-latest
-    name: SQL Review
+    name: SQL Review on Prod
     steps:
       - uses: actions/checkout@v3
-      - name: Check PROD SQL SCRIPT
+      - name: Check Prod SQL SCRIPT
         # You can change it to a specific version like bytebase/sql-review-action@0.0.4
         # We suggest using the latest version through the tag. Check it at https://github.com/Bytebase/sql-review-action/tags
         uses: bytebase/sql-review-action@main
@@ -21,4 +21,57 @@ jobs:
           # override-file-path: "<Your SQL review rules configuration file path>, ie: ./sql-review-override.yml "
           template-id: bb.sql-review.dev # "<SQL review rule template id> , should be one of bb.sql-review.prod or bb.sql-review.dev" 
           database-type: POSTGRES # "<The database type>"
-          file-pattern:  ^db/prod/.*\.sql$  # "<The file pattern for your SQL files>"
+          file-pattern:  ^db/prod/.*/.*\.sql$  # "<The file pattern for your SQL files>"
+      - name: Notify SQL Review result
+        # if: failure()
+        if: always()
+        id: slack
+        uses: slackapi/slack-github-action@v1.24.0
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        with:
+          channel-id: ${{ secrets.SLACK_WEBHOOK_CHANNEL }}
+          payload: |
+            {
+              "text": "GitHub Action SQL syntax review result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}",
+              "blocks": [
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "GitHub Action SQL syntax review result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}"
+                  }
+                }
+              ]
+            }
+  sql-deploy-to-prod:
+    needs: sql-review-prod
+    runs-on: ubuntu-latest
+    name: Run SQL CD Here
+    steps:
+      - uses: actions/checkout@v3
+      - name: You can run SQL CD job here
+        run: |
+          echo "Run CD pipeline here "
+
+      - name: Notify SQL CD pipeline result
+        if: always()
+        id: slack
+        uses: slackapi/slack-github-action@v1.24.0
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        with:
+          channel-id: ${{ secrets.SLACK_WEBHOOK_CHANNEL }}
+          payload: |
+            {
+              "text": "GitHub Action SQL CD pipeline: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}",
+              "blocks": [
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "GitHub Action SQL CD pipeline:: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}"
+                  }
+                }
+              ]
+            }
