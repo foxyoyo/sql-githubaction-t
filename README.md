@@ -5,6 +5,7 @@
 
 # Checking SQL syntax on action "Pull request"
 - Detail : ./override/sql-review-default.yaml
+![Model](https://github.com/foxyoyo/sql-githubaction-t/blob/master/temp/chk_on_pr.png)
 ![Model](https://github.com/foxyoyo/sql-githubaction-t/blob/master/temp/error_happened.png)
 
 
