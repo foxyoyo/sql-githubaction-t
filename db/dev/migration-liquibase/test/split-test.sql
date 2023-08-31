@@ -997,4 +997,3 @@ CREATE INDEX IF NOT EXISTS "idx_antz_user_id_task" ON "antz"("user_id", "task");
 -- changeset angelchang:245
 CREATE INDEX IF NOT EXISTS "api_log_user_id_created_at_idx" ON "api_log"("user_id", "created_at");
 -- rollback: DROP INDEX api_log_user_id_created_at_idx;
-
