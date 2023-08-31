@@ -30,8 +30,7 @@ jobs:
           path: ${{ runner.temp }}/schema/*.sql
       - name: list split result
         run: |
-            pwd
-            pwd && ls -al ${{ runner.temp }}/schema/
+            ls -al ${{ runner.temp }}/schema/
         shell: bash
       - name: Check DEV SPLIT SQL SCRIPT ON Worker
         uses: bytebase/sql-review-action@main
