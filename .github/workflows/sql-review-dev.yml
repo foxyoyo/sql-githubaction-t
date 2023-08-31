@@ -38,7 +38,7 @@ jobs:
         with:
           template-id: bb.sql-review.dev
           database-type: POSTGRES
-          file-pattern:  ${{ runner.temp }}/schema/*.sql$
+          file-pattern:  ${{ runner.temp }}/schema/^schema.*.sql$
 
   sql-review-dev:
     runs-on: ubuntu-latest
