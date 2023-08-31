@@ -23,11 +23,16 @@ jobs:
           for i in schema-split.*; do mv "$i" $sql_split_path; done
           pwd && ls -al $sql_split_path
         shell: bash
-      - name: Upload logs on fail
+      - name: Upload sql to temo
         uses: actions/upload-artifact@v3
         with:
           name: Upload SQL
           path: ${{ runner.temp }}/schema/*.sql
+      - name: list split result
+        run: |
+            pwd
+            pwd && ls -al ${{ runner.temp }}/schema/
+        shell: bash
 
   sql-review-dev:
     runs-on: ubuntu-latest
