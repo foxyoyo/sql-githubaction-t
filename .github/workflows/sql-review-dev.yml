@@ -33,6 +33,12 @@ jobs:
             pwd
             pwd && ls -al ${{ runner.temp }}/schema/
         shell: bash
+      - name: Check DEV SPLIT SQL SCRIPT ON Worker
+        uses: bytebase/sql-review-action@main
+        with:
+          template-id: bb.sql-review.dev
+          database-type: POSTGRES
+          file-pattern:  ${{ runner.temp }}/schema/.*\.sql$
 
   sql-review-dev:
     runs-on: ubuntu-latest
@@ -49,15 +55,6 @@ jobs:
           template-id: bb.sql-review.dev # "<SQL review rule template id> , should be one of bb.sql-review.prod or bb.sql-review.dev" 
           database-type: POSTGRES # "<The database type>"
           file-pattern:  ^db/dev/.*/.*\.sql$  # "<The file pattern for your SQL files>"
-      - name: Check DEV SPLIT SQL SCRIPT ON Worker
-        # You can change it to a specific version like bytebase/sql-review-action@0.0.4
-        # We suggest using the latest version through the tag. Check it at https://github.com/Bytebase/sql-review-action/tags
-        uses: bytebase/sql-review-action@main
-        with:
-          # override-file-path: "<Your SQL review rules configuration file path>, ie: ./sql-review-override.yml "
-          template-id: bb.sql-review.dev # "<SQL review rule template id> , should be one of bb.sql-review.prod or bb.sql-review.dev" 
-          database-type: POSTGRES # "<The database type>"
-          file-pattern:  ${{ runner.temp }}/schema/.*\.sql$  # "<The file pattern for your SQL files>"
       - name: Notify SQL Review result
         # if: failure()
         if: always()
