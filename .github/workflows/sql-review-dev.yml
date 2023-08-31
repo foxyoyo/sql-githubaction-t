@@ -9,6 +9,18 @@ on:
       - develop
 
 jobs:
+
+  split-schema-sql-file:
+      runs-on: ubuntu-latest
+      steps:
+      - uses: actions/checkout@v3
+      - name: Split schema.sql into small sql
+        run: |
+          awk '{filename = "db/dev/migration-liquibase/schema-split." int((NR-1)/1000) ".sql"; print >> filename}' schema.sql
+          pwd && ls -al
+        shell: bash
+
+
   sql-review-dev:
     runs-on: ubuntu-latest
     name: SQL Review
