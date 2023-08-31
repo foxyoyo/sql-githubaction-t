@@ -30,4 +30,3 @@ ALTER TABLE "clinic_mark" ADD CONSTRAINT "clinic_mark_user_id_fkey" FOREIGN KEY 
 -- changeset angelchang:503
 ALTER TABLE "clinic_medicine" ADD CONSTRAINT "clinic_medicine_clinic_id_fkey" FOREIGN KEY ("clinic_id") REFERENCES "clinic" ("id") ON UPDATE NO ACTION ON DELETE RESTRICT;
 -- rollback: ALTER TABLE clinic_medicine DROP CONSTRAINT clinic_medicine_clinic_id_fkey;
-
