@@ -38,7 +38,7 @@ jobs:
         with:
           template-id: bb.sql-review.dev
           database-type: POSTGRES
-          file-pattern:  ${{ runner.temp }}/schema/^schema.*.sql$
+          file-pattern:  /home/runner/work/sql-githubaction-t/sql-githubaction-t/schema-split.0.sql
 
   sql-review-dev:
     runs-on: ubuntu-latest
