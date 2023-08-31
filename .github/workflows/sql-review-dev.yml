@@ -18,7 +18,7 @@ jobs:
         run: |
           sql_origin_path="./temp/schema.sql"
           sql_split_path="/db/dev/migration-liquibase/test"
-          awk '{filename = "schema-split." int((NR-1)/1000) ".sql"; print >> filename}' $path
+          awk '{filename = "schema-split." int((NR-1)/1000) ".sql"; print >> filename}' $sql_origin_path=
           for i in schema-split.*; do mv "$i" $sql_split_path; done
           pwd && ls -al $sql_split_path
         shell: bash
