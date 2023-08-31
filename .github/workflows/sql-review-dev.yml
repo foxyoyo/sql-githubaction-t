@@ -20,7 +20,7 @@ jobs:
           pwd
           sql_origin_path="./temp/schema.sql"
           sql_split_path="${{ runner.temp }}/schema"
-          awk '{filename = "schema-split-" int((NR-1)/1000) ".sql"; print >> filename}' $sql_origin_path
+          awk '{filename = "schema-split-" int((NR-1)/500) ".sql"; print >> filename}' $sql_origin_path
           for i in *.sql; do mv "$i" $sql_split_path; done
           pwd && ls -al $sql_split_path
         shell: bash
@@ -33,6 +33,7 @@ jobs:
         run: |
             ls -al ${{ runner.temp }}/schema/
         shell: bash
+      - uses: actions/checkout@v3
       - name: Check DEV SPLIT SQL SCRIPT ON Worker
         uses: bytebase/sql-review-action@main
         with:
