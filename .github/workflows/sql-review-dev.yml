@@ -17,7 +17,7 @@ jobs:
       - name: Split schema.sql into small sql
         run: |
           awk '{filename = "schema-split." int((NR-1)/1000) ".sql"; print >> filename}' ./temp/schema.sql
-          for i in schema-split.*; do mv "$i" "./db/dev/migration-liquibase/test"; done
+          for i in schema-split.*; do cp "$i" "./db/dev/migration-liquibase/test"; done
           pwd && ls -al ./db/dev/migration-liquibase/test
         shell: bash
 
