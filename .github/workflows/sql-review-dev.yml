@@ -16,7 +16,7 @@ jobs:
       - uses: actions/checkout@v3
       - name: Split schema.sql into small sql
         run: |
-          awk '{filename = "schema-split." int((NR-1)/1000) ".sql"; print >> ./db/dev/migration-liquibase/test/filename}' ./temp/schema.sql
+          awk '{filename = "schema-split." int((NR-1)/1000) ".sql"; print >> /db/dev/migration-liquibase/test/filename}' ./temp/schema.sql
           pwd && ls -al ./db/dev/migration-liquibase/test
         shell: bash
 
