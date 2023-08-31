@@ -50,7 +50,7 @@ jobs:
           # override-file-path: "<Your SQL review rules configuration file path>, ie: ./sql-review-override.yml "
           template-id: bb.sql-review.dev
           database-type: POSTGRES
-          file-pattern:  ^db/dev/.*/.*/.*\.sql$ 
+          file-pattern:  ^db/dev/.*/.*/.*\.sql$
           # file-pattern: ^home/runner/work/_temp/schema/.*\.sql$
 
       - name: Notify SQL Review result
