@@ -13,6 +13,7 @@ jobs:
       runs-on: ubuntu-latest
       steps:
       - uses: actions/checkout@v3
+      - run:  mkdir -p ${{ runner.temp }}/schema
       - name: Split schema.sql into small sql
         run: |
           pwd
@@ -22,6 +23,11 @@ jobs:
           for i in schema-split.*; do mv "$i" $sql_split_path; done
           pwd && ls -al $sql_split_path
         shell: bash
+      - name: Upload logs on fail
+        uses: actions/upload-artifact@v3
+        with:
+          name: Upload SQL
+          path: ${{ runner.temp }}/schema/*.sql
 
   sql-review-dev:
     runs-on: ubuntu-latest
