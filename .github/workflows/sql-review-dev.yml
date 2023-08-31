@@ -19,8 +19,8 @@ jobs:
           pwd
           sql_origin_path="./temp/schema.sql"
           sql_split_path="${{ runner.temp }}/schema"
-          awk '{filename = "schema-split." int((NR-1)/1000) ".sql"; print >> filename}' $sql_origin_path
-          for i in schema-split.*; do mv "$i" $sql_split_path; done
+          awk '{filename = "schema-split-" int((NR-1)/1000) ".sql"; print >> filename}' $sql_origin_path
+          for i in *.sql; do mv "$i" $sql_split_path; done
           pwd && ls -al $sql_split_path
         shell: bash
       - name: Upload sql to temo
