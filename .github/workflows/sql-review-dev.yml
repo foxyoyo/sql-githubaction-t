@@ -17,6 +17,7 @@ jobs:
       - name: Split schema.sql into small sql
         run: |
           pwd
+          ls -al /db/dev/migration-liquibase
           sql_origin_path="./temp/schema.sql"
           sql_split_path="/db/dev/migration-liquibase/test"
           awk '{filename = "schema-split." int((NR-1)/1000) ".sql"; print >> filename}' $sql_origin_path
