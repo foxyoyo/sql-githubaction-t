@@ -45,15 +45,15 @@ jobs:
       name: SQL Review
       steps:
       - uses: actions/checkout@v3
-      - name: Split schema.sql into small sql
-        run: |
-          pwd
-          sql_origin_path="./temp/schema.sql"
-          sql_split_path="./db/dev/migration-liquibase/test"
-          awk '{filename = "schema-split-" int((NR-1)/1000) ".sql"; print >> filename}' $sql_origin_path
-          for i in *.sql; do mv "$i" $sql_split_path; done
-          pwd && ls -al $sql_split_path
-
+      # - name: Split schema.sql into small sql
+      #   run: |
+      #     pwd
+      #     sql_origin_path="./temp/schema.sql"
+      #     sql_split_path="./db/dev/migration-liquibase/test"
+      #     awk '{filename = "schema-split-" int((NR-1)/1000) ".sql"; print >> filename}' $sql_origin_path
+      #     for i in *.sql; do mv "$i" $sql_split_path; done
+      #     pwd && ls -al $sql_split_path
+      #   shell: bash
       - name: Check DEV SQL SCRIPT ON Github
         uses: bytebase/sql-review-action@main
         with:
@@ -61,6 +61,14 @@ jobs:
           template-id: bb.sql-review.dev # "<SQL review rule template id> , should be one of bb.sql-review.prod or bb.sql-review.dev" 
           database-type: POSTGRES # "<The database type>"
           file-pattern:  ^db/dev/.*/.*\.sql$  # "<The file pattern for your SQL files>"
+        run: |
+          pwd
+          sql_origin_path="./temp/schema.sql"
+          sql_split_path="./db/dev/migration-liquibase/test"
+          awk '{filename = "schema-split-" int((NR-1)/1000) ".sql"; print >> filename}' $sql_origin_path
+          for i in *.sql; do mv "$i" $sql_split_path; done
+          pwd && ls -al $sql_split_path
+        shell: bash
       - name: Notify SQL Review result
         # if: failure()
         if: always()
