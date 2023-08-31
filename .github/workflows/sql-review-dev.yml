@@ -44,6 +44,7 @@ jobs:
       needs: split-schema-sql-file
       name: SQL Review
       steps:
+      - uses: actions/checkout@v3
       - name: Check DEV SQL SCRIPT ON Github
         uses: bytebase/sql-review-action@main
         with:
