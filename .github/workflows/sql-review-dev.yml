@@ -9,28 +9,35 @@ on:
       - develop
 
 jobs:
+  # split-schema-sql-file:
+  #     runs-on: ubuntu-latest
+  #     steps:
+  #     - uses: actions/checkout@v3
+  #     - name: Split schema.sql into small sql
+  #       run: |
+  #         pwd
+  #         sql_origin_path="./temp/schema.sql"
+  #         sql_split_path="./db/dev/migration-liquibase/test"
+  #         awk '{filename = "schema-split." int((NR-1)/1000) ".sql"; print >> filename}' $sql_origin_path
+  #         for i in schema-split.*; do mv "$i" $sql_split_path; done
+  #         pwd && ls -al $sql_split_path
+  #       shell: bash
 
-  split-schema-sql-file:
-      runs-on: ubuntu-latest
-      steps:
+  sql-review-dev:
+    runs-on: ubuntu-latest
+    # needs: split-schema-sql-file
+    name: SQL Review
+    steps:
       - uses: actions/checkout@v3
       - name: Split schema.sql into small sql
         run: |
           pwd
-          ls -al .
           sql_origin_path="./temp/schema.sql"
           sql_split_path="./db/dev/migration-liquibase/test"
           awk '{filename = "schema-split." int((NR-1)/1000) ".sql"; print >> filename}' $sql_origin_path
           for i in schema-split.*; do mv "$i" $sql_split_path; done
           pwd && ls -al $sql_split_path
         shell: bash
-
-  sql-review-dev:
-    runs-on: ubuntu-latest
-    needs: split-schema-sql-file
-    name: SQL Review
-    steps:
-      - uses: actions/checkout@v3
       - name: Check DEV SQL SCRIPT
         # You can change it to a specific version like bytebase/sql-review-action@0.0.4
         # We suggest using the latest version through the tag. Check it at https://github.com/Bytebase/sql-review-action/tags
