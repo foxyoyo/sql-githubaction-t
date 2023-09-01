@@ -36,7 +36,7 @@ jobs:
             echo "ls runner temp"
             ls -al ${{ runner.temp }}/schema/
             echo "ls dev test"
-            ls -al ./dev/migration-liquibase/test
+            ls -al ./db/dev/migration-liquibase/test
         shell: bash
       # - uses: actions/checkout@v3
       - name: Check DEV SPLIT SQL SCRIPT ON Worker
