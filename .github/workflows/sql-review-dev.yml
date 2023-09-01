@@ -18,6 +18,7 @@ jobs:
       - name: Split schema.sql into small sql
         run: |
           pwd
+          ls -al `pwd`
           sql_origin_path="./temp/schema.sql"
           # sql_split_path="${{ runner.temp }}/schema"
           sql_split_path="./dev/migration-liquibase/test"
