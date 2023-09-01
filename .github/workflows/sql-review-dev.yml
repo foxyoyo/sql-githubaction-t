@@ -30,7 +30,8 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: Upload SQL
-          path: ${{ runner.temp }}/schema/*.sql
+          # path: ${{ runner.temp }}/schema/*.sql
+          path: ./db/dev/migration-liquibase/test/*.sql
       - name: list split result
         run: |
             echo "ls runner temp"
