@@ -21,7 +21,7 @@ jobs:
           ls -al `pwd`
           sql_origin_path="./temp/schema.sql"
           # sql_split_path="${{ runner.temp }}/schema"
-          sql_split_path="./dev/migration-liquibase/test"
+          sql_split_path="./db/dev/migration-liquibase/test"
           awk '{filename = "schema-split-" int((NR-1)/500) ".sql"; print >> filename}' $sql_origin_path
           for i in *.sql; do mv "$i" $sql_split_path; done
           pwd && ls -al $sql_split_path
