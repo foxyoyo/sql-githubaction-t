@@ -49,7 +49,6 @@ jobs:
   #         # file-pattern: /home/runner/work/_temp/schema/schema-split-0.sql
   #         # file-pattern:  ^home/runner/work/_temp/schema/.*\.sql$
   #         file-pattern:   ^db/dev/.*/.*/.*\.sql$
-  
   sql-review-dev:
       runs-on: ubuntu-latest
       # needs: split-schema-sql-file
