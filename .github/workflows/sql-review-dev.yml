@@ -64,7 +64,6 @@ jobs:
           database-type: POSTGRES
           file-pattern:  ^db/dev/.*/.*/.*\.sql$
           # file-pattern: ^home/runner/work/_temp/schema/.*\.sql$
-
       - name: Notify SQL Review result
         # if: failure()
         if: always()
