@@ -10,7 +10,6 @@ do
 case $i in
     --file=*)
     FILE="${i#*=}"
-    # FILE="./db/dev/migration-liquibase/schema-split-0.sql"
     shift
     ;;
     --database-type=*)
