@@ -96,7 +96,6 @@ jobs:
       - name: You can run SQL CD job here
         run: |
           echo "Run CD pipeline here "
-
       - name: Notify SQL CD pipeline result
         if: always()
         id: slack
