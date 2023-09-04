@@ -58,7 +58,8 @@ jobs:
       - name: Check DEV SQL SCRIPT ON Github
         # uses: bytebase/sql-review-action@main
         # uses: foxyoyo/clone-sql-review-t@master
-        uses: foxyoyo/sql-githubaction-t@develop
+        # uses: foxyoyo/sql-githubaction-t@develop
+        uses: ./action
         with:
           ## override-file-path: "<Your SQL review rules configuration file path>, ie: ./sql-review-override.yml "
           template-id: bb.sql-review.dev
@@ -87,7 +88,7 @@ jobs:
                 }
               ]
             }
-            
+
   sql-deploy-to-dev:
     needs: sql-review-dev
     runs-on: ubuntu-latest
