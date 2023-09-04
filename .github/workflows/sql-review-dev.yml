@@ -60,7 +60,7 @@ jobs:
         # uses: bytebase/sql-review-action@main
         uses: foxyoyo/clone-sql-review-t@master
         with:
-          # override-file-path: "<Your SQL review rules configuration file path>, ie: ./sql-review-override.yml "
+          ## override-file-path: "<Your SQL review rules configuration file path>, ie: ./sql-review-override.yml "
           template-id: bb.sql-review.dev
           database-type: POSTGRES
           file-pattern:  ^db/dev/.*/.*/.*\.sql$
