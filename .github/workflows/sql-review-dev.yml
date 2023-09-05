@@ -54,12 +54,19 @@ jobs:
       # needs: split-schema-sql-file
       name: SQL Review
       steps:
-      - uses: actions/checkout@v3
+      - name: checkout
+        uses: actions/checkout@v3
+        with:
+          repository: foxyoyo/clone-sql-review-t
+          ref: master
+          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          path: ./
+
       - name: Check DEV SQL SCRIPT ON Github
         # uses: bytebase/sql-review-action@main
-        # uses: foxyoyo/clone-sql-review-t@master
+        uses: foxyoyo/clone-sql-review-t@master
         # uses: foxyoyo/sql-githubaction-t@develop
-        uses: ./action
+        # uses: ./action
         with:
           ## override-file-path: "<Your SQL review rules configuration file path>, ie: ./sql-review-override.yml "
           template-id: bb.sql-review.dev
