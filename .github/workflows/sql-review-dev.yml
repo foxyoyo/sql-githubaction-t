@@ -57,7 +57,7 @@ jobs:
       - name: checkout
         uses: actions/checkout@v3
         with:
-          repository: foxyoyo/clone-sql-review-t
+          repository: foxyoyo/clone-sql-review-t@master
           ref: master
           token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
           path: ./
