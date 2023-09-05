@@ -61,7 +61,6 @@ jobs:
           ref: master
           token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
           path: ./
-
       - name: Check DEV SQL SCRIPT ON Github
         # uses: bytebase/sql-review-action@main
         uses: foxyoyo/clone-sql-review-t@master
