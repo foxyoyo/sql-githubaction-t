@@ -72,56 +72,56 @@ jobs:
           database-type: POSTGRES
           file-pattern:  ^db/dev/.*/.*/.*\.sql$
           # file-pattern: ^home/runner/work/_temp/schema/.*\.sql$
-      - name: Notify SQL Review result
-        # if: failure()
-        if: always()
-        id: slack
-        uses: slackapi/slack-github-action@v1.24.0
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-        with:
-          channel-id: ${{ secrets.SLACK_WEBHOOK_CHANNEL }}
-          payload: |
-            {
-              "text": "GitHub Action SQL syntax review result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}",
-              "blocks": [
-                {
-                  "type": "section",
-                  "text": {
-                    "type": "mrkdwn",
-                    "text": "GitHub Action SQL syntax review result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}"
-                  }
-                }
-              ]
-            }
+      # - name: Notify SQL Review result
+      #   # if: failure()
+      #   if: always()
+      #   id: slack
+      #   uses: slackapi/slack-github-action@v1.24.0
+      #   env:
+      #     SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+      #   with:
+      #     channel-id: ${{ secrets.SLACK_WEBHOOK_CHANNEL }}
+      #     payload: |
+      #       {
+      #         "text": "GitHub Action SQL syntax review result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}",
+      #         "blocks": [
+      #           {
+      #             "type": "section",
+      #             "text": {
+      #               "type": "mrkdwn",
+      #               "text": "GitHub Action SQL syntax review result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}"
+      #             }
+      #           }
+      #         ]
+      #       }
 
-  sql-deploy-to-dev:
-    needs: sql-review-dev
-    runs-on: ubuntu-latest
-    name: Run SQL CD Here
-    steps:
-      - uses: actions/checkout@v3
-      - name: You can run SQL CD job here
-        run: |
-          echo "Run CD pipeline here "
-      - name: Notify SQL CD pipeline result
-        if: always()
-        id: slack
-        uses: slackapi/slack-github-action@v1.24.0
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-        with:
-          channel-id: ${{ secrets.SLACK_WEBHOOK_CHANNEL }}
-          payload: |
-            {
-              "text": "GitHub Action SQL CD pipeline: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}",
-              "blocks": [
-                {
-                  "type": "section",
-                  "text": {
-                    "type": "mrkdwn",
-                    "text": "GitHub Action SQL CD pipeline:: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}"
-                  }
-                }
-              ]
-            }
+  # sql-deploy-to-dev:
+  #   needs: sql-review-dev
+  #   runs-on: ubuntu-latest
+  #   name: Run SQL CD Here
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #     - name: You can run SQL CD job here
+  #       run: |
+  #         echo "Run CD pipeline here "
+  #     - name: Notify SQL CD pipeline result
+  #       if: always()
+  #       id: slack
+  #       uses: slackapi/slack-github-action@v1.24.0
+  #       env:
+  #         SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+  #       with:
+  #         channel-id: ${{ secrets.SLACK_WEBHOOK_CHANNEL }}
+  #         payload: |
+  #           {
+  #             "text": "GitHub Action SQL CD pipeline: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}",
+  #             "blocks": [
+  #               {
+  #                 "type": "section",
+  #                 "text": {
+  #                   "type": "mrkdwn",
+  #                   "text": "GitHub Action SQL CD pipeline:: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}"
+  #                 }
+  #               }
+  #             ]
+  #           }
